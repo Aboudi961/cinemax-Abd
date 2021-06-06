@@ -28,3 +28,4 @@ CREATE TABLE IF NOT EXISTS bestellingen (
     vertoning_id INTEGER,
     FOREIGN KEY (vertoning_id) REFERENCES vertoningen (id) ON DELETE SET NULL
     );
+    

@@ -41,3 +41,4 @@ class bestellingen:
         vertoning_id = dict["vertoning_id"]
 
         return cls(aantal_kinderen, aantal_volwassen, totaalprijs, vertoning_id)
+        

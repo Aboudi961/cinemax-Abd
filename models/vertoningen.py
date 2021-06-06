@@ -53,3 +53,4 @@ class Vertoning:
         film_id = dict["film_id"]
 
         return cls(tijdstip, zaalnummer, drie_D, film_id )
+        
