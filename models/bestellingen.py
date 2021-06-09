@@ -1,6 +1,6 @@
 from models.vertoningen import Vertoning
 
-class bestellingen:
+class Bestellingen:
     def __init__(self, aantal_kind, aantal_volwassen, totaalprijs, vertoning_id):
         self.aantal_kind = aantal_kind
         self.aantal_volwassen = aantal_volwassen

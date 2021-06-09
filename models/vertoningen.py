@@ -50,7 +50,8 @@ class Vertoning:
         tijdstip = dict["tijdstip"]
         zaalnummer = dict["zaalnummer"]
         drie_D = dict["drie"]
+        films = Film(dict["id"], dict["titel"], dict["duur"], dict["IMDB_id"])
         film_id = dict["film_id"]
 
-        return cls(tijdstip, zaalnummer, drie_D, film_id )
+        return cls(tijdstip, zaalnummer, drie_D, films, film_id )
         
