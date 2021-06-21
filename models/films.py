@@ -2,13 +2,15 @@ class Film:
 
 
 
-    def __init__(self,id, titel, duur, IMDB_id ):
-        self.id = id
+    def __init__(self, titel, duur, IMDB_id ):
+        
         self.titel = titel
         self._duur = duur
-        self._IMDB_id = IMDB_id
+        self.IMDB_id = IMDB_id
 
 
+    def __str__(self):
+        return self.titel
 
     @property
     def duur(self):
@@ -23,25 +25,25 @@ class Film:
 
     @property
     def IMDB_id(self):
-        return self.IMDB_id
+        return self._IMDB_id 
 
     @IMDB_id.setter
-    def IMDB_id(self, code):
+    def IMDB_id(self, IMDB_id):
         try:
-            if code[0:2] == "tt":
-                self._IMDB_id 
+            if IMDB_id[0:2] == "tt":
+                self._IMDB_id = IMDB_id
 
         except ValueError:
             raise
 
     @classmethod
     def from_dict(cls, dict):
-        id = dict["id"]
+       
         titel = dict["titel"]
         duur = dict["duur"]
         IMDB_id = dict["IMDB_id"]
 
-        return cls(id, titel, duur, IMDB_id)
+        return cls(titel, duur, IMDB_id)
         
     
     

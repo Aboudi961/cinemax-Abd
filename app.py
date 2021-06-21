@@ -3,7 +3,6 @@ from adminapp.beheer_vertoningen import beheer_vertoningen
 from adminapp.beheer_bestellingen import beheer_bestellingen
 from prettytable import PrettyTable
 from ansimarkup import ansiprint as print
-from utils.terminalultils import invoer_getal, toon_menu
 from utils.terminalultils import clear_terminal, invoer_getal, toon_menu
 
 
@@ -24,5 +23,7 @@ while True:
         beheer_films()
     if keuze == 2:
         beheer_vertoningen()
+        
     if keuze == 3:
         beheer_bestellingen()
+        

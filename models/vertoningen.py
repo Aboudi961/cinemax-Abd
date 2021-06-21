@@ -2,56 +2,47 @@
 from models.films import Film
 
 class Vertoning:
-    def __init__(self,tijdstip, zaalnummer, drie_D, film_id ):
-        self.tijdstip =tijdstip
-        self.zaalnummer = zaalnummer
-        self.drie_D = drie_D
-        self.film_id = film_id
+    def __init__(self, id, tijdstip, zaalnummer, drie_D, film_id ):
+        self._id = id
+        self._tijdstip = tijdstip
+        self._zaalnummer = zaalnummer
+        self._drie_D = drie_D
+        self._film_id = film_id
 
     @property
-    def tijdstip(self):
-        return self.tijdstip
+    def id(self):
+        return self._id
+
+    # @property
+    # def tijdstip(self):
+    #     return self._tijdstip
 
     @property
     def zaalnummer(self):
-        return self.zaalnummer
+        return self._zaalnummer
 
-    @property
-    def tijdstijp(self):
-        return self.tijdstijp
-
+    
     @property
     def drie_D(self):
-        return self.drie_D
+        if self.drie_D == "ja":
+            return ("De film in 3D vertoont")
+        else:
+            return ("De film wordt niet in 3D vertoont ")
 
-    @drie_D.setter
-    def drie_D(self, drie_D):
-        try:
-            if drie_D:
-                self.drie_D
-        except ValueError:
-            raise
+    
 
     @property
     def film_id(self):
-        return self.film_id
-
-    @film_id.setter
-    def film_id(self, film):
-        try:
-            if isinstance(film, Film):
-                self.film_id
-        except ValueError:
-            raise
+        return self._film_id
 
 
     @classmethod
     def from_dict(cls, dict):
+        id = dict["id"]
         tijdstip = dict["tijdstip"]
         zaalnummer = dict["zaalnummer"]
-        drie_D = dict["drie"]
-        films = Film(dict["id"], dict["titel"], dict["duur"], dict["IMDB_id"])
-        film_id = dict["film_id"]
+        drie_D = dict["drie_D"]
+        film_id = Film(dict["titel"], dict["film_id"])
 
-        return cls(tijdstip, zaalnummer, drie_D, films, film_id )
+        return cls(id, tijdstip, zaalnummer, drie_D, film_id )
         

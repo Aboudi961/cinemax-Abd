@@ -18,19 +18,10 @@ class Bestellingen:
 
     @property
     def totaalprijs(self):
-        return self.aantal_kind + self.aantal_volwassen
+        return self.aantal_kind * 10 + self.aantal_volwassen * 15
 
-    @property
-    def vertoning_id(self):
-        return self.vertoning_id
-
-    @vertoning_id.setter
-    def vertoning_id(self, vertoning_id):
-        try:
-            if isinstance(vertoning_id, Vertoning):
-                self.vertoning_id
-        except ValueError:
-            raise
+    
+        
 
     
     @classmethod

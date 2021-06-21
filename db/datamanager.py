@@ -53,8 +53,9 @@ class Datamanager:
         with dbconn() as cur:
             sql = "INSERT INTO films (titel, duur, IMDB_id) VALUES (?, ?, ?)"
             cur.execute(sql, [film.titel, film.duur, film.IMDB_id])
+            return film
 
-    def film_verwijderen(self, id):
+    def film_verwijderen_id(self, id):
         with dbconn() as cur:
             if id:
                 sql = "DELETE FROM films WHERE id = ?"
@@ -62,7 +63,7 @@ class Datamanager:
             else:
                 raise ValueError
 
-    def film_verwijderen(self, IMDB_id):
+    def film_verwijderen_imdb(self, IMDB_id):
         with dbconn() as cur:
             if id:
                 sql = "DELETE FROM films WHERE id = ?"
@@ -86,12 +87,21 @@ class Datamanager:
 
     def alle_vertoningen(self):
         with dbconn() as cur:
-            sql = "SELECT vertoningen.*, films.* FROM vertoningen INNER JOIN films ON vertoningen.film_id = films.id"
+            sql = "SELECT * FROM vertoningen INNER JOIN films on vertoningen.film_id = films_id"
             cur.execute(sql)
             rijen = cur.fetchall()
 
             vertoningen = [Vertoning.from_dict(rij) for rij in rijen]
             return vertoningen
+
+
+    def vertoningen_van_film(self, film):
+        with dbconn() as cur:
+            sql = "SELECT vertoningen.*, films.*FROM vertoningen INNER JOIN films on vertoningen.film_id = films_id WHERE film_id = ?"
+            cur.execute(sql, [film.id])
+            rijen = cur.fetchall()
+            films = [Vertoning.from_dict(rij) for rij in rijen]
+            return films
 
     def vertoningen_toevoegen(self, vertoningen):
         with dbconn() as cur:
@@ -113,7 +123,7 @@ class Datamanager:
 
     def alle_bestellingen(self):
         with dbconn() as cur:
-            sql = "SELECT bestellingen.*,vertoningen*, films.* FROM bestellingen INNER JOIN vertoningen, films ON bestellingen.film_id = films.id AND vertoningen.film_id = film_id"
+            sql = "SELECT * FROM bestellingen"
             cur.execute(sql)
             rijen = cur.fetchall()
 
